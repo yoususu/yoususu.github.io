@@ -1,262 +1,210 @@
-<!DOCTYPE html>
-<html lang="zh_CN">
-
-<!-- Head tag -->
+<html>
 <head>
+    <!-- 点击烟花特效 -->
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+    <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+    <script type="text/javascript" src="/js/fireworks.js"></script>
 
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>确是心安</title>
+    <meta charset="utf-8">
 
-    <!--Description-->
+    <!-- 引入配置文件 -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- 字体图片库 -->
+    
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
     
-
-    
-        <meta name="description" content="My diary.My live.I think,so I am."/>
-    
-
-    <!--Author-->
-    
-        <meta name="author" content="yousu"/>
-    
-
-    <!--Open Graph Title-->
-    
-        <meta property="og:title" content="Yousu的小窝"/>
-    
-
-    <!--Open Graph Description-->
-    
-        <meta property="og:description" content="My diary.My live.I think,so I am."/>
-    
-
-    <!--Open Graph Site Name-->
-        <meta property="og:site_name" content="Yousu的小窝"/>
-
-    <!--Type page-->
-    
-        <meta property="og:type" content="website"/>
-    
-
-    <!--Page Cover-->
-    
-    
-        <meta property="og:image" content="http://example.comhttps://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201802%2F11%2F20180211163247_xHnuG.jpeg&amp;refer=http%3A%2F%2Fb-ssl.duitang.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1614759413&amp;t=d5e85a20858ba75796229cded6fbea48"/>
-    
-
-        <meta name="twitter:card" content="summary_large_image"/>
-
-    
-
-    
-        <meta name="twitter:image" content="http://example.comhttps://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201802%2F11%2F20180211163247_xHnuG.jpeg&amp;refer=http%3A%2F%2Fb-ssl.duitang.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1614759413&amp;t=d5e85a20858ba75796229cded6fbea48"/>
-    
-
-    <!-- Title -->
-    
-    <title>Archives: 2021 - Yousu的小窝</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-
-    <!-- Custom CSS -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Gallery -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
-
-    <!-- Google Analytics -->
-    
-
-
-    <!-- favicon -->
-    
-
 <meta name="generator" content="Hexo 5.3.0"></head>
-
-
 <body>
 
-    <!-- Menu -->
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Configurable Title</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                
-                    <li>
-                        <a href="/">
-                            
-                                Home
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a href="/archives">
-                            
-                                Archives
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a href="/tags">
-                            
-                                Tags
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a href="/categories">
-                            
-                                Categories
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a target="_blank" rel="noopener" href="https://github.com/klugjo/hexo-theme-clean-blog">
-                            
-                                <i class="fa fa-github fa-stack-2x"></i>
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
-
-    <!-- Main Content -->
-    
-
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
-<header class="intro-header" style="background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201802%2F11%2F20180211163247_xHnuG.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1614759413&t=d5e85a20858ba75796229cded6fbea48')">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>2021</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            
-                <div class="post-preview">
-    <a href="/2021/01/28/hello-world/">
-        <h1 class="post-title archive">
-            Hello World
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2021-01-28
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-    
-</ul>
-        </div>
-    </div>
+    <div id="main">
+        <!-- 引入侧边栏 -->
+        <aside>
+            <!-- 搜索栏 -->
+<div id="search">
+    <input class="search-input" type="text" placeholder="search">
+    <i id="search-icon" class="fa fa-bars" title="切换目录与索引">
 </div>
 
+<!-- 侧边目录栏 -->
+<div id="tree">
+    
 
-    <!-- Footer -->
-    <hr />
-
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                    
-
-                    
-
-                    
-                        <li>
-                            <a href="https://github.com/klugjo/hexo-theme-clean-blog" target="_blank">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
+    
+                    <ul>
+                        <li class="file">
+                            <a href="/2021/01/28/hello-world/">
+                                <i class="fa fa-file"></i>
+                                hello-world
                             </a>
                         </li>
-                    
-
-                    
-
-                    
-
-                    
-                </ul>
-                <p class="copyright text-muted">&copy; 2021 yousu<br></p>
-                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
-                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
-            </div>
-        </div>
-    </div>
-</footer>
-
-
-    <!-- After footer scripts -->
+                    </ul>
     
-<!-- jQuery -->
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+                    <ul>
+                        <li class="directory">
+                            <a href="#" class="directory">
+                                <i class="fa fa-folder"></i>
+                                当下
+                            </a>
+                            
+                    <ul>
+                        <li class="file">
+                            <a href="/2021/02/07/当下/假的/">
+                                <i class="fa fa-file"></i>
+                                假的
+                            </a>
+                        </li>
+                    </ul>
+    
+                        </li>
+                        
+                    </ul>
+    
+                    <ul>
+                        <li class="file">
+                            <a href="/2021/02/07/测试的/">
+                                <i class="fa fa-file"></i>
+                                测试的
+                            </a>
+                        </li>
+                    </ul>
+    
+                    <ul>
+                        <li class="directory">
+                            <a href="#" class="directory">
+                                <i class="fa fa-folder"></i>
+                                过去
+                            </a>
+                            
+                    <ul>
+                        <li class="file">
+                            <a href="/2021/02/07/过去/真的/">
+                                <i class="fa fa-file"></i>
+                                真的
+                            </a>
+                        </li>
+                    </ul>
+    
+                        </li>
+                        
+                    </ul>
+    
+</div>
 
-<!-- Bootstrap -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- 分级刷新 -->
+<div id="toc"></div>
+        </aside>
 
-<!-- Gallery -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+        <!-- 引入导航 -->
+        <nav>
+            <ul id="menu">
+    <!-- 内部链接本页面直接跳转 -->
+    
+    <li class="menu-item">
+        <a href="/" class="menu-item-link">主页</a>
+    </li>
+    
+    <li class="menu-item">
+        <a href="/about" class="menu-item-link">关于</a>
+    </li>
+    
 
-<!-- Disqus Comments -->
+    <!-- 外部链接打开新的窗口跳转 -->
+    
+    <li class="menu-item">
+        <a href="https://yoususu.github.io" class="menu-item-link" target="_blank">github</a>
+    </li>
+    
+
+</ul>
+        </nav>
+
+        <!-- 引入正文 -->
+        <div id="content">
+            <div id="articleList">
+<!--动态线条背景-->
+    <script type="text/javascript" color="122 103 238" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+    </script>
+
+    <ul>
+        
+
+            <li class="article-li">
+                <span class="article-date">2021-02-07</span>
+                <a class="article-read" href="/2021/02/07/测试的/"> 阅读全文 </span>
+                <a class="article-title" href="/2021/02/07/测试的/">测试的</a>
+                <div class="article-digest">
+                    
+                    ...
+                </div>
+            </li>
+            
+        
+
+            <li class="article-li">
+                <span class="article-date">2021-02-07</span>
+                <a class="article-read" href="/2021/02/07/当下/假的/"> 阅读全文 </span>
+                <a class="article-title" href="/2021/02/07/当下/假的/">假的</a>
+                <div class="article-digest">
+                    
+                    ...
+                </div>
+            </li>
+            
+        
+
+            <li class="article-li">
+                <span class="article-date">2021-02-07</span>
+                <a class="article-read" href="/2021/02/07/过去/真的/"> 阅读全文 </span>
+                <a class="article-title" href="/2021/02/07/过去/真的/">真的</a>
+                <div class="article-digest">
+                    
+                    ...
+                </div>
+            </li>
+            
+        
+
+            <li class="article-li">
+                <span class="article-date">2021-01-28</span>
+                <a class="article-read" href="/2021/01/28/hello-world/"> 阅读全文 </span>
+                <a class="article-title" href="/2021/01/28/hello-world/">hello-world</a>
+                <div class="article-digest">
+                    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any pro
+                    ...
+                </div>
+            </li>
+            
+        
+    </ul>
+</div>
+        </div>
+        
+    </div>
+
+    <!-- 引入 jquery -->
+    
+<script src="/lib/jquery-3.4.1.min.js"></script>
 
 
+    <!-- 引入 pjax -->
+    
+<script src="/lib/jquery.pjax.js"></script>
 
-</body>
+    
+    <!-- 引入 js 文件 -->
+    
+<script src="/js/main.js"></script>
 
+
+    <!-- 引入 鼠标点击16字箴言 -->
+    
+<script src="/js/click_show_text.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
