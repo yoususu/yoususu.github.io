@@ -61,7 +61,7 @@
                     </ul>
     
                     <ul>
-                        <li class="file">
+                        <li class="file active">
                             <a href="/2021/03/20/学习/springboot所支持的缓存组件之——redis/">
                                 <i class="fa fa-file"></i>
                                 springboot所支持的缓存组件之——redis
@@ -90,7 +90,7 @@
                             </a>
                             
                     <ul>
-                        <li class="file active">
+                        <li class="file">
                             <a href="/2021/02/07/过去/真的/">
                                 <i class="fa fa-file"></i>
                                 真的
@@ -145,11 +145,12 @@
         <div id="content">
             <div>
     <span id="post-author">作者: 有苏</span>
-    <span id="post-date">2021-02-07 17:39:45</span>
+    <span id="post-date">2021-03-20 16:56:16</span>
 </div>
 
 <div id="article">
-    
+    <h1 id="Spring-Boot的存储管理依赖于spring框架中的cache相关的一些接口："><a href="#Spring-Boot的存储管理依赖于spring框架中的cache相关的一些接口：" class="headerlink" title="Spring Boot的存储管理依赖于spring框架中的cache相关的一些接口："></a>Spring Boot的存储管理依赖于spring框架中的cache相关的一些接口：</h1><h2 id="bash"><a href="#bash" class="headerlink" title="``` bash"></a>``` bash</h2><h2 id="org-springframwork-cache-Cache"><a href="#org-springframwork-cache-Cache" class="headerlink" title="org.springframwork.cache.Cache"></a>org.springframwork.cache.Cache</h2><h2 id="org-springframwork-cache-CacheManager"><a href="#org-springframwork-cache-CacheManager" class="headerlink" title="org.springframwork.cache.CacheManager"></a>org.springframwork.cache.CacheManager</h2><h2 id><a href="#" class="headerlink" title="```"></a>```</h2><h1 id="来进行缓存管理接口。"><a href="#来进行缓存管理接口。" class="headerlink" title="来进行缓存管理接口。"></a>来进行缓存管理接口。</h1><h2 id="如果项目中没有定义类型为CacheManager的Bean组件或者是名为cacheResolver的CacheResolver的缓存解析器，那么spring会自动尝试启动以下缓存组件：（按顺序）"><a href="#如果项目中没有定义类型为CacheManager的Bean组件或者是名为cacheResolver的CacheResolver的缓存解析器，那么spring会自动尝试启动以下缓存组件：（按顺序）" class="headerlink" title="如果项目中没有定义类型为CacheManager的Bean组件或者是名为cacheResolver的CacheResolver的缓存解析器，那么spring会自动尝试启动以下缓存组件：（按顺序）"></a>如果项目中没有定义类型为CacheManager的Bean组件或者是名为cacheResolver的CacheResolver的缓存解析器，那么spring会自动尝试启动以下缓存组件：（按顺序）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">（1）Generic</span><br><span class="line">（2）JCache</span><br><span class="line">（3）EnCache</span><br><span class="line">（4）Hazelcast</span><br><span class="line">（5）Infinispan</span><br><span class="line">（6）Couchbase</span><br><span class="line">（7）Redis</span><br><span class="line">（8）Caffeine</span><br><span class="line">（9）Simple</span><br></pre></td></tr></table></figure>
+<h2 id="加入在项目中添加了某种组件，那么spring-Boot项目会启动对应的缓存管理器。"><a href="#加入在项目中添加了某种组件，那么spring-Boot项目会启动对应的缓存管理器。" class="headerlink" title="加入在项目中添加了某种组件，那么spring Boot项目会启动对应的缓存管理器。"></a>加入在项目中添加了某种组件，那么spring Boot项目会启动对应的缓存管理器。</h2>
 </div>
         </div>
         

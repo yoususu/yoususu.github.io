@@ -48,14 +48,23 @@
                         <li class="directory">
                             <a href="#" class="directory">
                                 <i class="fa fa-folder"></i>
-                                当下
+                                学习
                             </a>
                             
                     <ul>
                         <li class="file active">
-                            <a href="/2021/02/07/当下/假的/">
+                            <a href="/2021/02/07/学习/Mybetis的分页插件PageHelper/">
                                 <i class="fa fa-file"></i>
-                                假的
+                                Mybetis的分页插件PageHelper
+                            </a>
+                        </li>
+                    </ul>
+    
+                    <ul>
+                        <li class="file">
+                            <a href="/2021/03/20/学习/springboot所支持的缓存组件之——redis/">
+                                <i class="fa fa-file"></i>
+                                springboot所支持的缓存组件之——redis
                             </a>
                         </li>
                     </ul>
@@ -140,7 +149,10 @@
 </div>
 
 <div id="article">
-    
+    <h1 id="Mybetis的分页插件PageHelper"><a href="#Mybetis的分页插件PageHelper" class="headerlink" title="Mybetis的分页插件PageHelper"></a>Mybetis的分页插件PageHelper</h1><h2 id="首先，分页插件需要在xml中进行配置"><a href="#首先，分页插件需要在xml中进行配置" class="headerlink" title="首先，分页插件需要在xml中进行配置"></a>首先，分页插件需要在xml中进行配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugins&gt;</span><br><span class="line">        &lt;plugin interceptor=<span class="string">&quot;com.github.pagehelper.PageInterceptor&quot;</span>&gt;</span><br><span class="line">            &lt;!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库--&gt;</span><br><span class="line">            &lt;property name=<span class="string">&quot;helperDialect&quot;</span> value=<span class="string">&quot;mysql&quot;</span>/&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="其次，在使用中推荐这种使用方式："><a href="#其次，在使用中推荐这种使用方式：" class="headerlink" title="其次，在使用中推荐这种使用方式："></a>其次，在使用中推荐这种使用方式：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PageHelper.startPage(1, 10);</span><br><span class="line">List&lt;Country&gt; list = countryMapper.selectIf(1);</span><br></pre></td></tr></table></figure>
+<p>查询之后的第一个select生效，每十条数据进行一次分页</p>
+
 </div>
         </div>
         
