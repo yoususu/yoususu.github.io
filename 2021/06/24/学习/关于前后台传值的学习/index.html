@@ -61,7 +61,7 @@
                     </ul>
     
                     <ul>
-                        <li class="file active">
+                        <li class="file">
                             <a href="/2021/02/07/学习/Mybetis的分页插件PageHelper/">
                                 <i class="fa fa-file"></i>
                                 Mybetis的分页插件PageHelper
@@ -133,7 +133,7 @@
                     </ul>
     
                     <ul>
-                        <li class="file">
+                        <li class="file active">
                             <a href="/2021/06/24/学习/关于前后台传值的学习/">
                                 <i class="fa fa-file"></i>
                                 关于前后台传值的学习
@@ -235,13 +235,44 @@
         <div id="content">
             <div>
     <span id="post-author">作者: 有苏</span>
-    <span id="post-date">2021-02-07 17:40:01</span>
+    <span id="post-date">2021-06-24 13:42:47</span>
 </div>
 
 <div id="article">
-    <h1 id="Mybetis的分页插件PageHelper"><a href="#Mybetis的分页插件PageHelper" class="headerlink" title="Mybetis的分页插件PageHelper"></a>Mybetis的分页插件PageHelper</h1><h2 id="首先，分页插件需要在xml中进行配置"><a href="#首先，分页插件需要在xml中进行配置" class="headerlink" title="首先，分页插件需要在xml中进行配置"></a>首先，分页插件需要在xml中进行配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugins&gt;</span><br><span class="line">        &lt;plugin interceptor=<span class="string">&quot;com.github.pagehelper.PageInterceptor&quot;</span>&gt;</span><br><span class="line">            &lt;!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库--&gt;</span><br><span class="line">            &lt;property name=<span class="string">&quot;helperDialect&quot;</span> value=<span class="string">&quot;mysql&quot;</span>/&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="其次，在使用中推荐这种使用方式："><a href="#其次，在使用中推荐这种使用方式：" class="headerlink" title="其次，在使用中推荐这种使用方式："></a>其次，在使用中推荐这种使用方式：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PageHelper.startPage(1, 10);</span><br><span class="line">List&lt;Country&gt; list = countryMapper.selectIf(1);</span><br></pre></td></tr></table></figure>
-<p>查询之后的第一个select生效，每十条数据进行一次分页</p>
+    <p>1.jquery的Ajax传值</p>
+<p>前台到后台</p>
+<p>前台jsp代码：<br>function saveUserInfo(){<br>  var params = {};//定义一个数组</p>
+<p>  var userNO = jq(“#userNO”).val();//把前台页面上的值都赋予一个变量<br>  var userName = jq(“#userName”).val();<br>  var phoneNumber = jq(“#phoneNumber”).val();<br>  params[“userNO”] = userNO ;//把这些变量都存在这个数组里<br>  params[“userName”] = userName;<br>  params[“phoneNumber”] = phoneNumber;<br>  jq.ajax({<br>        type : “post”,<br>        url : “&lt;%=basePath%&gt;personalSetting/personalSettingSaveAll.do”,//找到action里相应的方法<br>        data : params, //把数组的值赋给data，把上面的param改为data,这里就能直接去掉<br>        dataType : “text”,//根据数据类型选择text、jason等<br>        success : function(data) {<br>          alert(msg); //msg可以在后台Action配置，也可以在这里直接写提示信息<br>        },<br>        error : function(data) {<br>          alert(“msg”);<br>        }<br>       });<br>        }<br> }</p>
+<p>后台Action代码：</p>
+<p>@SuppressWarnings({ “unchecked”, “unused”, “rawtypes” })<br>@RequestMapping(value = “/personalSetting/personalSettingSaveAll.do”, method = RequestMethod.POST)<br>public void saveAll(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {<br>    response.setCharacterEncoding(“UTF-8”);<br>    HttpSession session = request.getSession();<br>    String userNO  = request.getParameter(“userNO”)+””;<br>    String userName = request.getParameter(“userName”)+””;<br>    String phoneNumber = request.getParameter(“phoneNumber”)+””;<br>    PersonalSettingEntity pSE = new PersonalSettingEntity();<br>    if(!(“”.equals(userNO))||””.equals(userName )||””.equals(phoneNumber ))){ //如果都不为空<br>        pSE.setUserNO(userNO);<br>        pSE.setUserName(userName);<br>        pSE.setPhoneNumber(phoneNumber);<br>        PersonSettingService.saveProcessSetting(pSE);<br>        msg = “保存成功”;<br>    }else{<br>        msg = “填写不完整”; //可以在前台校验，这里为了举例子<br>    }<br>        response.getWriter().print(msg); //这里的msg是text数据，所以前台数据类型是text。<br>}</p>
+<p>后台到前台</p>
+<p>后台Action代码：</p>
+<p>@SuppressWarnings({ “unchecked”, “unused”, “rawtypes” })<br>@RequestMapping(value = “/personalSetting/personalSettingInitAll.do”, method = RequestMethod.POST)<br>public void qureyAll(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {<br>    response.setCharacterEncoding(“UTF-8”);<br>    HttpSession session = request.getSession();<br>    String userId = request.getSession().getAttribute(“currentUserId”).toString();<br>    PersonalSettingEntity pSE = PersonSettingService.getPersonalSetting(Long.valueOf(userId));<br>    response.getWriter().print(JSONArray.fromObject(pSE).toString());<br>}</p>
+<p>前台jsp代码：</p>
+<p>function get(){<br>  jq.ajax({<br>         type : “post”,<br>         url : “&lt;%=basePath%&gt;personalSetting/personalSettingInitAll.do”,<br>         dataType : “json”,<br>         success :function (data) {<br>          var bean;<br>          jq.each(data,function(index){<br>          bean = data[index];<br>          jq(“#userNO”).attr(“value”,bean.userNO);<br>          jq(“#userName”).attr(“value”,bean.userName);<br>          jq(“#phoneNumber”).attr(“value”,bean.phoneNumber);<br>           }<br>         },<br>         error :function (data){<br>            alert(“系统出错！”);<br>         }<br>   });<br> } </p>
+<p>2.JSP给JS传值（后到前）</p>
+<p>三种方法：<br>1：直接在代码中嵌入&lt;%=%&gt;表达式。（会导致很多后续问题，不建议）<br>2：通过JSP的EL表达式，即%{ }；<br>3：在jsp中调用js的dom（类似于XML的DOM树），以参数的方法给JS函数传值。</p>
+<p>3.springboot+thymeleaf框架，前台接收后台传值</p>
+<p>后台代码：通过ModelAndView类型返回</p>
+<p>@RequestMapping(value = “/list”, method = RequestMethod.GET)<br>  public ModelAndView list(@RequestParam(value = “pageNum”, defaultValue = “1”) int pageNum,<br>                             @RequestParam(value = “pageSize”, defaultValue = “10”) int pageSize) {<br>        Page<User> page = PageHelper.startPage(pageNum, pageSize);<br>        List<User> userList = userService.findAll();<br>        page.addAll(userList);<br>        ModelAndView model = new ModelAndView(“demo_user”,”page”,page);<br>        model.addObject(“websocketUrl”, “ws://localhost:8080/websocket”);<br>        return model;<br>    }</User></User></p>
+<p>前台Html：通过隐藏input元素传值</p>
+<p><code>&lt;input id=&quot;websocketUrl&quot; type=&quot;hidden&quot; th:value=&quot;$&#123;websocketUrl&#125;&quot; /&gt;</code></p>
+<p>前台JS：<br>$(“#websocketUrl”).val();</p>
+<p>注意：前台需要${websocketUrl}形式读取后台传值时，注意使用thymeleaf的类型标签“th:xx”，使用html默认标签很多都不能读取${websocketUrl}。</p>
+<p>4.struts2框架</p>
+<p>struts2的Action类一般都会继承（extends）ActionSupport类（Action类，即实现action的类）</p>
+<p>1.前传后：</p>
+<p>jsp里<code>&lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;</code>，后台Action类里有变量private String username;及其get(),set()方法即可得到</p>
+<p>此时，后传前：<br>Action类：</p>
+<p>1）com.opensymphony.xwork2.ActionContext;<br>定义：ActionContext context=ActionContext.getContext();<br>context.put(“username”, username);<br>前台用：${username}即可得到其值；</p>
+<p>2）javax.servlet.http.HttpServletRequest<br>HttpServletRequest request;<br>@Override<br>public void setServletRequest(HttpServletRequest request) {<br>this.request=request;<br>}<br>request.setAttribute(“message”, “通过ServletRequestAware接口实现了访问Servlet API”);<br>前台取值：${requestScope.message}</p>
+<p>3）ServletActionContext.getRequest().setAttribute(“message”, “通过ServletActionContext接口实现了访问Servlet API”);<br>前台取值：${requestScope.message}</p>
+<p>2.前台传值：</p>
+<p><code>&lt;input type=&quot;text&quot; name=&quot;user.userName&quot;/&gt;</code><br>Action类：（User类与前台传的所有变量名相同）<br>private User user;<br>public User getUser() {<br>return user;<br>}<br>ActionContext context=ActionContext.getContext()；<br>context.getSession().put(“userName”, user.getUserName());</p>
+<p>前台取值：<br>&lt;%=request.getAttribute(“user.userName”) %&gt;或${userName }</p>
+<p>3.前台传值：</p>
+<p><code>&lt;input type=&quot;text&quot; name=&quot;userName&quot;/&gt;</code><br>Action类：继承extends ActionSupport implements ModelDriven<User><br>User user=new User();<br>@Override<br>public User getModel() {<br>return user;<br>}</User></p>
+<p>前台取值：<br>${userName }</p>
 
 </div>
         </div>

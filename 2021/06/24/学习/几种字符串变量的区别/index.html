@@ -61,7 +61,7 @@
                     </ul>
     
                     <ul>
-                        <li class="file active">
+                        <li class="file">
                             <a href="/2021/02/07/学习/Mybetis的分页插件PageHelper/">
                                 <i class="fa fa-file"></i>
                                 Mybetis的分页插件PageHelper
@@ -142,7 +142,7 @@
                     </ul>
     
                     <ul>
-                        <li class="file">
+                        <li class="file active">
                             <a href="/2021/06/24/学习/几种字符串变量的区别/">
                                 <i class="fa fa-file"></i>
                                 几种字符串变量的区别
@@ -235,13 +235,14 @@
         <div id="content">
             <div>
     <span id="post-author">作者: 有苏</span>
-    <span id="post-date">2021-02-07 17:40:01</span>
+    <span id="post-date">2021-06-24 13:39:45</span>
 </div>
 
 <div id="article">
-    <h1 id="Mybetis的分页插件PageHelper"><a href="#Mybetis的分页插件PageHelper" class="headerlink" title="Mybetis的分页插件PageHelper"></a>Mybetis的分页插件PageHelper</h1><h2 id="首先，分页插件需要在xml中进行配置"><a href="#首先，分页插件需要在xml中进行配置" class="headerlink" title="首先，分页插件需要在xml中进行配置"></a>首先，分页插件需要在xml中进行配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugins&gt;</span><br><span class="line">        &lt;plugin interceptor=<span class="string">&quot;com.github.pagehelper.PageInterceptor&quot;</span>&gt;</span><br><span class="line">            &lt;!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库--&gt;</span><br><span class="line">            &lt;property name=<span class="string">&quot;helperDialect&quot;</span> value=<span class="string">&quot;mysql&quot;</span>/&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="其次，在使用中推荐这种使用方式："><a href="#其次，在使用中推荐这种使用方式：" class="headerlink" title="其次，在使用中推荐这种使用方式："></a>其次，在使用中推荐这种使用方式：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PageHelper.startPage(1, 10);</span><br><span class="line">List&lt;Country&gt; list = countryMapper.selectIf(1);</span><br></pre></td></tr></table></figure>
-<p>查询之后的第一个select生效，每十条数据进行一次分页</p>
+    <p>1：三者在执行速度中的比较：StringBuilder&gt;StringBuffer&gt;String</p>
+<p>2：String&lt;（StringBuffer，String Builder）的原因<br>String：字符串常量<br>StringBuffer：字符串变量<br>StringBuilder：字符串变量</p>
+<p>对于以上，我们会有一个疑问，代码如下：<br>1 String s = “abcd”;<br>2 s = s+1;<br>3 System.out.print(s);// result : abcd1</p>
+<p> 　　　   我们明明就是改变了String型的变量s的，为什么说是没有改变呢? 其实这是一种欺骗，JVM是这样解析这段代码的：首先创建对象s，赋予一个abcd，然后再创建一个新的对象s用来　　　　执行第二行代码，也就是说我们之前对象s并没有变化，所以我们说String类型是不可改变的对象了，由于这种机制，每当用String操作字符串时，实际上是在不断的创建新的对象，而原来的对象就会变为垃圾被ＧＣ回收掉，可想而知这样执行效率会有多底。</p>
 
 </div>
         </div>

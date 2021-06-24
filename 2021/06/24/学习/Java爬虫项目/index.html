@@ -52,7 +52,7 @@
                             </a>
                             
                     <ul>
-                        <li class="file">
+                        <li class="file active">
                             <a href="/2021/06/24/学习/Java爬虫项目/">
                                 <i class="fa fa-file"></i>
                                 Java爬虫项目
@@ -61,7 +61,7 @@
                     </ul>
     
                     <ul>
-                        <li class="file active">
+                        <li class="file">
                             <a href="/2021/02/07/学习/Mybetis的分页插件PageHelper/">
                                 <i class="fa fa-file"></i>
                                 Mybetis的分页插件PageHelper
@@ -235,13 +235,48 @@
         <div id="content">
             <div>
     <span id="post-author">作者: 有苏</span>
-    <span id="post-date">2021-02-07 17:40:01</span>
+    <span id="post-date">2021-06-24 13:43:18</span>
 </div>
 
 <div id="article">
-    <h1 id="Mybetis的分页插件PageHelper"><a href="#Mybetis的分页插件PageHelper" class="headerlink" title="Mybetis的分页插件PageHelper"></a>Mybetis的分页插件PageHelper</h1><h2 id="首先，分页插件需要在xml中进行配置"><a href="#首先，分页插件需要在xml中进行配置" class="headerlink" title="首先，分页插件需要在xml中进行配置"></a>首先，分页插件需要在xml中进行配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugins&gt;</span><br><span class="line">        &lt;plugin interceptor=<span class="string">&quot;com.github.pagehelper.PageInterceptor&quot;</span>&gt;</span><br><span class="line">            &lt;!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库--&gt;</span><br><span class="line">            &lt;property name=<span class="string">&quot;helperDialect&quot;</span> value=<span class="string">&quot;mysql&quot;</span>/&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="其次，在使用中推荐这种使用方式："><a href="#其次，在使用中推荐这种使用方式：" class="headerlink" title="其次，在使用中推荐这种使用方式："></a>其次，在使用中推荐这种使用方式：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PageHelper.startPage(1, 10);</span><br><span class="line">List&lt;Country&gt; list = countryMapper.selectIf(1);</span><br></pre></td></tr></table></figure>
-<p>查询之后的第一个select生效，每十条数据进行一次分页</p>
+    <p>数据选型：<br>数据采集层<br>数据存储层<br>数据处理层<br>数据展示层</p>
+<p>采集层：<br>1：HttpClient<br>2：HTML Cleaner<br>3：Xpath<br>4：正则表达式<br>存储层：<br>1：Hbase（列存储数据库）<br>2：Redis（数据仓库）<br>处理：<br>1:solr/es<br>展示：<br>1：SpringMVC<br>2：freemarker（查询Hbase数据库）<br>3:Jquery+HighChart（绘图）</p>
+<p>部署方案：<br>爬虫项目：多台服务器<br>网站爬虫分类URL定时项目：一台服务器<br>Hbase数据库：集群<br>Solr服务器：集群<br>Redis数据库：集群<br>爬虫监控项目：一台数据库<br>Web项目：多台服务器<br>Zookeeper服务器：集群</p>
+<p>URL定时项目 → URL仓库Radis → 爬虫项目 → Hbase储存 → Soir索引 → Web展示 → Zookeeper监控 → 邮件提醒项目</p>
+<hr>
+<p>开始正题</p>
+<p>首先，爬取网站的爬虫代码几乎一致，区别在于表达式和模板的解析。<br>（可以采取拦截下载分析界面）<br>采用技术:      1:  HttpClient<br>2：HTML Cleaner<br>3：Xpath<br>4：正则表达式</p>
+<p>关于项目开头：采用maven对项目版本进行控制</p>
+<p>maven仓库版本号：group ID：org.apache.maven.archetypes<br>    Artifact ID：maven-archetype-quickstart<br>    Version: RELEASE</p>
+<p>  ● Catalog File: <a target="_blank" rel="noopener" href="http://repo1.maven.org/maven2/archetype-catalog.xml">http://repo1.maven.org/maven2/archetype-catalog.xml</a><br>  ● Description: maven catalog</p>
+<p>HttpClientBuilder.builder 中 ：</p>
+<p>具有Builder，Factory生成器，其中Factory倾向于简单的生产，而Builder倾向于很复杂的创            建过程。</p>
+<p>table </p>
+<p>关于爬取方案选择：<br>Java+Jsoup<br>URL：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37897662/article/details/82909356?utm_source=blogxgwz2">https://blog.csdn.net/m0_37897662/article/details/82909356?utm_source=blogxgwz2</a></p>
+<p>Java+ selenium<br>URL：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31152023/article/details/96457118">https://blog.csdn.net/qq_31152023/article/details/96457118</a></p>
+<p>关于AJAX与From提交方式的区别认识：<br>1.隐藏form提交，更新数据完成后，需要转到一个空白页面再对原页面进行提交后处理；ajax则不用，可以直接返回原页面进行提交后的处理。可见ajax可以比隐藏form提交少增加一个页面。<br>2.ajax出于安全性考虑，不能对文件进行操作，所以就不能通过ajax来实现文件上传，而通过隐藏form提交则可以实现这个功能，所以这就是目前用隐藏form提交的主要用途。</p>
+<p>现在接下来讲述如何通过隐藏form来实现文件上传<br>1)首先定义一个用于填写表单内容的form</p>
+<form name="form1"></form>
+2)接着定义一个用于提交的form
+<form name="form2" target="myIframe">  //用于指定提交返回的页面显示在这个隐藏的iframe中
+<iframe name="myIframe" style="display:none"></iframe>  //用于存放提交返回后的空白页面
+<div id="formInner" style="display:none"></div>  //用于获取form1的html内容，获得form1的表单元素
+</form>
+3)在form1提交时，进行如下javascript处理
+var formInner= document.getElementById("formInner");
+formInner.innerHTML = form1.innerHTML;  //复制form1的html代码
+form2.action = form1.action;
+form2.submit();
+4)提交后，进入后台处理，后台处理完成后，需要返回一个空白页面blank.jsp，这个页面是在隐藏的iframe中生成的，所以可以通过parent对象对原页面进行操作。
+比如原页面定义了一个updatePageFromSubmit()，则在blank.jsp页面中可以通过parent.updatePageFromSubmit()来调用进行提交返回后的处理
+
+
+<p>再来看Ajax网站的爬取方法：<br>先前，我们通过Get方法获取页面并打印出来时发现，输出的地方没有任何参数。故判断是由Ajax引起的。于是，在访问页面中，我们打开了浏览器端的开发者工具，在network-XHR-NAME一列中找到Ajax所提交的文件。这次，我们知道了ajax请求返回的是json数据。点击工具栏中的data项展开数据，接着点击0展开数据，发现有个title字段，内容刚好和网页的第一条数据匹配，可知这就是爬取的目标数据。</p>
+<p>鼠标向下滚动到网页底部时就会触发一次ajax请求，下面是三次ajax请求：<br><a target="_blank" rel="noopener" href="https://www.toutiao.com/search_content/offset=0&amp;format=json&amp;keyword=%E7%BE%8E%E5%A5%B3&amp;autoload=true&amp;count=20&amp;cur_tab=1&amp;from=search_tab&amp;pd=synthesis">https://www.toutiao.com/search_content/offset=0&amp;format=json&amp;keyword=%E7%BE%8E%E5%A5%B3&amp;autoload=true&amp;count=20&amp;cur_tab=1&amp;from=search_tab&amp;pd=synthesis</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.toutiao.com/search_content/offset=20&amp;format=json&amp;keyword=%E7%BE%8E%E5%A5%B3&amp;autoload=true&amp;count=20&amp;cur_tab=1&amp;from=search_tab&amp;pd=synthesis">https://www.toutiao.com/search_content/offset=20&amp;format=json&amp;keyword=%E7%BE%8E%E5%A5%B3&amp;autoload=true&amp;count=20&amp;cur_tab=1&amp;from=search_tab&amp;pd=synthesis</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.toutiao.com/search_content/offset=40&amp;format=json&amp;keyword=%E7%BE%8E%E5%A5%B3&amp;autoload=true&amp;count=20&amp;cur_tab=1&amp;from=search_tab&amp;pd=synthesis">https://www.toutiao.com/search_content/offset=40&amp;format=json&amp;keyword=%E7%BE%8E%E5%A5%B3&amp;autoload=true&amp;count=20&amp;cur_tab=1&amp;from=search_tab&amp;pd=synthesis</a></p>
+<p>通过观察，其他数值都一致，只有offset的参数为有规律的增加。可以推测offset是偏移量，count参数是一次ajax请求返回数据的条数。</p>
+<p>通过</p>
 
 </div>
         </div>

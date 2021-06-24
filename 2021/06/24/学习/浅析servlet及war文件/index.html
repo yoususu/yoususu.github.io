@@ -61,7 +61,7 @@
                     </ul>
     
                     <ul>
-                        <li class="file active">
+                        <li class="file">
                             <a href="/2021/02/07/学习/Mybetis的分页插件PageHelper/">
                                 <i class="fa fa-file"></i>
                                 Mybetis的分页插件PageHelper
@@ -160,7 +160,7 @@
                     </ul>
     
                     <ul>
-                        <li class="file">
+                        <li class="file active">
                             <a href="/2021/06/24/学习/浅析servlet及war文件/">
                                 <i class="fa fa-file"></i>
                                 浅析servlet及war文件
@@ -235,13 +235,15 @@
         <div id="content">
             <div>
     <span id="post-author">作者: 有苏</span>
-    <span id="post-date">2021-02-07 17:40:01</span>
+    <span id="post-date">2021-06-24 13:42:11</span>
 </div>
 
 <div id="article">
-    <h1 id="Mybetis的分页插件PageHelper"><a href="#Mybetis的分页插件PageHelper" class="headerlink" title="Mybetis的分页插件PageHelper"></a>Mybetis的分页插件PageHelper</h1><h2 id="首先，分页插件需要在xml中进行配置"><a href="#首先，分页插件需要在xml中进行配置" class="headerlink" title="首先，分页插件需要在xml中进行配置"></a>首先，分页插件需要在xml中进行配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugins&gt;</span><br><span class="line">        &lt;plugin interceptor=<span class="string">&quot;com.github.pagehelper.PageInterceptor&quot;</span>&gt;</span><br><span class="line">            &lt;!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库--&gt;</span><br><span class="line">            &lt;property name=<span class="string">&quot;helperDialect&quot;</span> value=<span class="string">&quot;mysql&quot;</span>/&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="其次，在使用中推荐这种使用方式："><a href="#其次，在使用中推荐这种使用方式：" class="headerlink" title="其次，在使用中推荐这种使用方式："></a>其次，在使用中推荐这种使用方式：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PageHelper.startPage(1, 10);</span><br><span class="line">List&lt;Country&gt; list = countryMapper.selectIf(1);</span><br></pre></td></tr></table></figure>
-<p>查询之后的第一个select生效，每十条数据进行一次分页</p>
+    <p>在CMD命令中直接键入命令：<br>1：输入“telnet <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a> 80”，可以开始链接百度的80号端口<br>2：用CTRL+】键进行数据回显<br>3：在网站响应时间内输入get/http/1.0（用1.0版本http协议来获取网站相应）<br> ps（在响应时间内没有及时输入命令的话会因为超时而断开与主机的连接）</p>
+<p>http头数据：<br>User-Agent是浏览器信息<br>Accept是浏览器支持的格式<br>Cookie记录当前状态</p>
+<p>————————————————————————————————————————————<br>jar文件，顾名思义就是Java生成的文件压缩包类型。</p>
+<p>war文件，就是web项目所生成的文件压缩包类型。</p>
+<p>可以直接把另外工程的web-inf文件夹以及网页压缩为.zip格式，然后重命名为.war。接着直接丢到目标文件夹里即可。</p>
 
 </div>
         </div>

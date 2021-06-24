@@ -61,7 +61,7 @@
                     </ul>
     
                     <ul>
-                        <li class="file active">
+                        <li class="file">
                             <a href="/2021/02/07/学习/Mybetis的分页插件PageHelper/">
                                 <i class="fa fa-file"></i>
                                 Mybetis的分页插件PageHelper
@@ -124,7 +124,7 @@
                     </ul>
     
                     <ul>
-                        <li class="file">
+                        <li class="file active">
                             <a href="/2021/06/24/学习/事务初析/">
                                 <i class="fa fa-file"></i>
                                 事务初析
@@ -235,13 +235,39 @@
         <div id="content">
             <div>
     <span id="post-author">作者: 有苏</span>
-    <span id="post-date">2021-02-07 17:40:01</span>
+    <span id="post-date">2021-06-24 13:40:17</span>
 </div>
 
 <div id="article">
-    <h1 id="Mybetis的分页插件PageHelper"><a href="#Mybetis的分页插件PageHelper" class="headerlink" title="Mybetis的分页插件PageHelper"></a>Mybetis的分页插件PageHelper</h1><h2 id="首先，分页插件需要在xml中进行配置"><a href="#首先，分页插件需要在xml中进行配置" class="headerlink" title="首先，分页插件需要在xml中进行配置"></a>首先，分页插件需要在xml中进行配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugins&gt;</span><br><span class="line">        &lt;plugin interceptor=<span class="string">&quot;com.github.pagehelper.PageInterceptor&quot;</span>&gt;</span><br><span class="line">            &lt;!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库--&gt;</span><br><span class="line">            &lt;property name=<span class="string">&quot;helperDialect&quot;</span> value=<span class="string">&quot;mysql&quot;</span>/&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="其次，在使用中推荐这种使用方式："><a href="#其次，在使用中推荐这种使用方式：" class="headerlink" title="其次，在使用中推荐这种使用方式："></a>其次，在使用中推荐这种使用方式：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PageHelper.startPage(1, 10);</span><br><span class="line">List&lt;Country&gt; list = countryMapper.selectIf(1);</span><br></pre></td></tr></table></figure>
-<p>查询之后的第一个select生效，每十条数据进行一次分页</p>
+    <p>概念：指逻辑上的一组操作</p>
+<p>事务管理：    开启事务——start transaction；<br>     提交事务—— commit<br>        回滚事务——rollback</p>
+<p>示例：模拟银行转账</p>
+<pre><code class="js">package XXX；
+
+public class JDBCTranDemo&#123;
+public static void main（String[] args）&#123;
+Connection conn = null;
+PreparedStatement ps = null;
+ResultSet rs = null;
+try&#123;
+conn = JDBCUtils.getConn();
+conn.setAutoCommit(false);/*将自动提交事务功能进行关闭*/
+/*因为自动提交事务是默认为一句SQL语句，而要多条语句进行事务逻辑关联就必须手动进行设置*/
+
+
+ps = conn.prepareStatement(&quot;update account set money=money-100 where name = ?&quot;);
+ps.setString(1,&quot;a&quot;);
+ps.executeUpdate();
+
+ps = conn.prepareStatement(&quot;update account set money = money+100 where name = ?&quot;);
+&#125;catch(Exception e)&#123;
+e.printStackTrace();
+&#125;finally&#123;
+JDBCUtils.close(rs ,ps, conn);
+&#125;
+&#125;
+&#125;
+</code></pre>
 
 </div>
         </div>

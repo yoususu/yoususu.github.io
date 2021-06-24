@@ -61,7 +61,7 @@
                     </ul>
     
                     <ul>
-                        <li class="file active">
+                        <li class="file">
                             <a href="/2021/02/07/学习/Mybetis的分页插件PageHelper/">
                                 <i class="fa fa-file"></i>
                                 Mybetis的分页插件PageHelper
@@ -151,7 +151,7 @@
                     </ul>
     
                     <ul>
-                        <li class="file">
+                        <li class="file active">
                             <a href="/2021/06/24/学习/有关XML的学习/">
                                 <i class="fa fa-file"></i>
                                 有关XML的学习
@@ -235,13 +235,22 @@
         <div id="content">
             <div>
     <span id="post-author">作者: 有苏</span>
-    <span id="post-date">2021-02-07 17:40:01</span>
+    <span id="post-date">2021-06-24 13:38:31</span>
 </div>
 
 <div id="article">
-    <h1 id="Mybetis的分页插件PageHelper"><a href="#Mybetis的分页插件PageHelper" class="headerlink" title="Mybetis的分页插件PageHelper"></a>Mybetis的分页插件PageHelper</h1><h2 id="首先，分页插件需要在xml中进行配置"><a href="#首先，分页插件需要在xml中进行配置" class="headerlink" title="首先，分页插件需要在xml中进行配置"></a>首先，分页插件需要在xml中进行配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugins&gt;</span><br><span class="line">        &lt;plugin interceptor=<span class="string">&quot;com.github.pagehelper.PageInterceptor&quot;</span>&gt;</span><br><span class="line">            &lt;!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库--&gt;</span><br><span class="line">            &lt;property name=<span class="string">&quot;helperDialect&quot;</span> value=<span class="string">&quot;mysql&quot;</span>/&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="其次，在使用中推荐这种使用方式："><a href="#其次，在使用中推荐这种使用方式：" class="headerlink" title="其次，在使用中推荐这种使用方式："></a>其次，在使用中推荐这种使用方式：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PageHelper.startPage(1, 10);</span><br><span class="line">List&lt;Country&gt; list = countryMapper.selectIf(1);</span><br></pre></td></tr></table></figure>
-<p>查询之后的第一个select生效，每十条数据进行一次分页</p>
+    <p>XML的赋值必须加引号，而HTML则可以不用；</p>
+<p>在XML中version属性必须有，用来确定版本号；</p>
+<p>XML不向下兼容，所以开发的时候先择低版本；</p>
+<p>不能乱用&amp;符号，防止被意外解析；</p>
+<p>XML必须从第零行零列开始声明，前面连注释都不可以；</p>
+<p>属性是元素的一部分，必须出现在文档的开始；</p>
+<p>CDATA区：</p>
+<p>当文章中出现大量的转义字符时，可以使用CDATA区。在CDATA区中的代码不会去解析转译字符。而在CDATA区之外，转义字符将会被解析。</p>
+<p>DTD语法：<br>元素声明：</p>
+<p>DTD属性：<br>#REQUIRED：属性是必须的<br>#IMPLIED：属性不是必须的<br>#FIXED value：属性值是固定的</p>
+<p>Schema语法：<br>Schema相对与DTD的又是在于能够支持名称空间。</p>
+<p>常用API：SaxReader对象<br>read（….）加载执行xml文档<br>Document对象<br>getRootElement（）获得根元素<br>Element对象<br>elements（…..）获得指定名称的所有子元素。可以不指定名称<br>element（…..）获得指定名称第一个子元素。可以不指定名称<br>getName（…..）获得当前元素的元素名<br>attributeValue（…..）获得指定属性名的属性值<br>elementText（…..）获得指定名称子元素的文本值<br>getText（…..）获得当前元素的文本内容</p>
 
 </div>
         </div>
